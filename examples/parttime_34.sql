@@ -26,6 +26,14 @@ CREATE TABLE IF NOT EXISTS telefonos (
     PRIMARY KEY (id),
     FOREIGN KEY (contactos_id) REFERENCES contactos (id) -- CONSTRAINT 
 );
+DROP TABLE IF EXISTS followers;
+CREATE TABLE followers (
+    follower_id INTEGER NOT NULL,
+    followed_id INTEGER NOT NULL,
+    PRIMARY KEY (follower_id, followed_id),
+    FOREIGN KEY (follower_id) REFERENCES contactos (id), -- CONSTRAINT 
+    FOREIGN KEY (followed_id) REFERENCES contactos (id) -- CONSTRAINT 
+);
 
 -- DML = Data Manipulation Language
 
@@ -56,6 +64,12 @@ SELECT * FROM telefonos WHERE contactos_id = 1;
 
 INSERT INTO contactos (nombre, email) VALUES ('John Doe', 'john.doe@gmail.com');
 INSERT INTO contactos (nombre, email) VALUES ('Jane Doe', 'jane.doe@hotmail.com');
+INSERT INTO contactos (nombre, email) VALUES ('Tommy Doe', 'jane.doe@hotmail.com');
+INSERT INTO contactos (nombre, email) VALUES ('Sara Smith', 'sara.smith@hotmail.com');
+
+INSERT INTO contactos (nombre, email) VALUES ('Tom Holland', 'tom.holland@hotmail.com');
+INSERT INTO contactos (nombre, email) VALUES ('Will Smith', 'will.smith@hotmail.com');
+
 
 
 INSERT INTO telefonos (numero_telefonico, contactos_id) VALUES ('555-55-55', 1); -- Fine
@@ -74,3 +88,27 @@ UPDATE telefonos SET numero_telefonico='555-55-13' WHERE contactos_id = 1; -- Er
 -- DELETE FROM table_name WHERE condition;
 
 DELETE FROM telefonos WHERE id = 4;
+
+
+SELECT * FROM contactos WHERE id in (1, 2, 3, 10, 11);
+
+INSERT INTO followers (follower_id, followed_id) VALUES (1, 2);
+INSERT INTO followers (follower_id, followed_id) VALUES (2, 1);
+INSERT INTO followers (follower_id, followed_id) VALUES (3, 1);
+INSERT INTO followers (follower_id, followed_id) VALUES (2, 3);
+
+
+SELECT * FROM contactos AS a 
+JOIN followers AS b ON a.id = b.follower_id
+JOIN contactos AS c ON b.followed_id = c.id;
+
+
+SELECT a.*, count(b.followed_id) AS followeds FROM contactos AS a
+JOIN followers AS b ON a.id = b.followed_id GROUP BY b.followed_id;
+
+
+SELECT 
+c.nombre,
+(SELECT count(f.follower_id) FROM followers AS f WHERE f.follower_id = c.id) AS followers
+FROM contactos AS c WHERE c.nombre LIKE '%mi%';
+
