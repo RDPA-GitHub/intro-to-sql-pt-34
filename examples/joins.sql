@@ -13,3 +13,7 @@ SELECT * FROM contactos;
 -- LEFT JOIN (Da prioridad a los registros de la izquierda)
 SELECT * FROM contactos AS a
 LEFT JOIN telefonos AS b ON a.id = b.contactos_id;
+
+-- RIGHT JOIN (Da prioridad a los registros de la derecha)
+SELECT * FROM contactos AS a
+RIGHT JOIN telefonos AS b ON a.id = b.contactos_id;
