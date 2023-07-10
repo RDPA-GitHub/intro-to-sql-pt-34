@@ -3,3 +3,6 @@
 
 SELECT a.*, b.* FROM contactos AS a
 JOIN telefonos AS b ON a.id = b.contactos_id;
+
+SELECT a.*, b.* FROM contactos AS a
+JOIN telefonos AS b ON a.id = b.contactos_id WHERE a.nombre like 'Jane%';
