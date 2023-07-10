@@ -16,4 +16,7 @@ LEFT JOIN telefonos AS b ON a.id = b.contactos_id;
 
 -- RIGHT JOIN (Da prioridad a los registros de la derecha)
 SELECT * FROM contactos AS a
-RIGHT JOIN telefonos AS b ON a.id = b.contactos_id;
+RIGHT JOIN telefonos AS b ON a.id = b.contactos_id
+ORDER BY b.numero_telefonico DESC;
+
+SELECT * FROM contactos LIMIT 3 OFFSET 2;
