@@ -55,7 +55,7 @@ SELECT * FROM telefonos WHERE contactos_id = 3;
 
 -- INSERT INTO table_name (field1, field2, fieldN) VALUES (value1, value2, ...valueN);
 
-INSERT INTO contactos (nombre, email) VALUES ('John Doe', 'john.doe@gmail.com');
+INSERT INTO contactos (nombre, email) VALUES ('Tommy Doe', 'tommy.doe@gmail.com');
 INSERT INTO contactos (nombre, email) VALUES ('Jane Doe', 'jane.doe@hotmail.com');
 INSERT INTO contactos (nombre, email) VALUES ('Ronald Pena', 'ronald.micros@gmail.com');
 
